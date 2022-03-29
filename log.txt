@@ -1,0 +1,33 @@
+REAL PING BEHAVIOR :
+    ping 0 = ping 127.0.0.1
+    ping 1 = ping: connect: Invalid argument
+
+FONCTIONS AUTORISEES :
+    getpid, getuid, getaddrinfo (freeaddrinfo), gettimeofday,
+    inet_ntop, inet_pton,
+    exit, signal, alarm,
+    setsockopt, recvmsg, sendto, socket
+    read, write, malloc, free, *printf
+    1 variable globale -> pour le CTRL+C ??
+
+FONCTIONS INTERDITES :
+    fcntl, poll, ppoll
+
+COMMANDS TO LOOK UP :
+    ping -v -h
+    getaddrinfo
+    inet_ntop
+    inet_pton
+    alarm
+
+    FQDN ?
+    RTT ?
+    TTL = maximum number of IP routers that the packet can go
+        through before being thrown away
+
+inet_ntoa() : Ipv4 format to ASCII string XXX.XXX.XXX.XXX.
+inet_pton() : IPv4/IPv6 from text to binary form    char * -> void *
+inet_ntop() : IPv4/IPv6 from binary to text form    void * -> char *
+
+int inet_pton(int af, const char *src, void *dst);
+const char *inet_ntop(int af, const void *restrict src, char *restrict dst, socklen_t size);
