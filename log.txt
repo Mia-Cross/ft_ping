@@ -16,8 +16,6 @@ FONCTIONS INTERDITES :
 COMMANDS TO LOOK UP :
     ping -v -h
     getaddrinfo
-    inet_ntop
-    inet_pton
     alarm
 
     FQDN ?
@@ -31,3 +29,7 @@ inet_ntop() : IPv4/IPv6 from binary to text form    void * -> char *
 
 int inet_pton(int af, const char *src, void *dst);
 const char *inet_ntop(int af, const void *restrict src, char *restrict dst, socklen_t size);
+
+TODO BEFORE CLOSING PROJECT :
+    replace non libft functions
+    revoir les messages d'erreur
