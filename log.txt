@@ -1,3 +1,8 @@
+TODO :
+    add libft to be able to use all authorized functions
+        cleanup/verify libft
+        update Makefile
+
 REAL PING BEHAVIOR :
     ping 0 = ping 127.0.0.1
     ping 1 = ping: connect: Invalid argument

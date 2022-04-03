@@ -6,45 +6,56 @@
 #    By: lemarabe <lemarabe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/25 14:21:19 by schene            #+#    #+#              #
-#    Updated: 2022/03/29 20:54:03 by lemarabe         ###   ########.fr        #
+#    Updated: 2022/04/03 21:39:09 by lemarabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		ft_ping
 
+CC =		gcc
+
 SRCDIR =	srcs
 OBJDIR =	.obj
-INCLUDES =	-I include/
+INCLUDES =	-I include/ -I libft/include/
 
-SRCS =	ft_ping.c
+SRCS =		ft_ping.c utils.c
 
-OBJS =	$(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
-DPDCS =	$(OBJS:.o=.d)
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+OBJS =		$(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+DPDCS =		$(OBJS:.o=.d)
+CFLAGS = 	-Wall -Wextra -Werror -fsanitize=address -g
+
+LIB_NAME = 	libft
+LIB_PATH = 	$(LIB_NAME)/$(LIB_NAME).a
+LIB_FLAGS =	-L$(LIB_NAME) -lft
 
 opti:
 	@make -j all
 
 all :
+	@printf "[$(LIB_NAME)] " && make -C $(LIB_NAME)
 	@make $(NAME)
 
 -include $(DPDCS)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) $(LIB_PATH)
 	@printf "[$(NAME)] "
-	gcc $(CFLAGS) -o $(NAME) ${OBJS}
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) ${OBJS} $(LIB_PATH)
 	@echo Compiled $(NAME) successfully !
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c | $(OBJDIR)
-	gcc $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJDIR) :
 	@mkdir -p .obj
 
 clean :
 	@rm -rf $(OBJDIR)
+	@make clean -C $(LIB_NAME)
 
-fclean : clean
+cleanlib :
+	@make fclean -C $(LIB_NAME)
+
+fclean : cleanlib clean
 	@rm -rf $(NAME)
 
 re :
